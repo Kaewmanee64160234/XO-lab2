@@ -49,40 +49,65 @@ public class SuperOX {
         System.out.println("Turn>>> " + turn.toUpperCase());
     }
 
-    public static void inputRowAndColumn() {
-        showTurn();
-        
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Input Row :");
-        row = sc.nextInt();
-        System.out.print("Input Column :");
-        column = sc.nextInt();
+    public static boolean inputRowAndColumn() {
         System.out.println("--------------------------------");
+        showTurn();
+
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Input Row: ");
+        row = sc.nextInt();
+        System.out.print("Input Column: ");
+        column = sc.nextInt();
+
+
         if ((row > 0 && row < 4) && (column > 0 && column < 4)) {
             while (!board[row - 1][column - 1].equals("-")) {
+                System.out.println("--------------------------------");
                 showTurn();
-               showBoard();
-                System.out.print("Input Row :");
+                showBoard();
+                System.out.print("Input Row: ");
                 row = sc.nextInt();
-                System.out.print("Input Column :");
+                System.out.print("Input Column: ");
                 column = sc.nextInt();
-                         System.out.println("--------------------------------");
+
             }
             board[row - 1][column - 1] = turn;
-            changeTurn();
+            return true;
         } else {
-            return;
-        }
 
+            return false;
+        }
     }
 
     public static void changeTurn() {
         if (turn.toUpperCase().equals("X")) {
             turn = "O";
-
         } else {
             turn = "X";
         }
+    }
+
+    public static void checkWinner() {
+
+        if (checkRow()) {
+            System.out.println("+--------------------+");
+            System.out.println("|    !!! " + turn.toUpperCase() + " Win !!!   |");
+            System.out.println("+--------------------+");
+            isEnd = true;
+        } else {
+            isEnd = false;
+        }
+
+    }
+
+    public static boolean checkRow() {
+        for (int i = 0; i < 3; i++) {
+            if (!board[row - 1][i].equals(turn)) {
+                return false;
+            }
+
+        }
+        return true;
     }
 
     public static void main(String[] args) {
@@ -91,8 +116,11 @@ public class SuperOX {
 
         showBoard();
         while (!isEnd) {
-            inputRowAndColumn();
-            showBoard();
+            if (inputRowAndColumn()) {
+                showBoard();
+                checkWinner();
+                changeTurn();
+            }
 
         }
 //        System.out.println("end");
