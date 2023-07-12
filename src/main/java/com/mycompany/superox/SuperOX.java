@@ -95,7 +95,8 @@ public class SuperOX {
             System.out.println("|    !!! " + turn.toUpperCase() + " Win !!!   |");
             System.out.println("+--------------------+");
             showBoard();
-            isEnd = true;
+            askContinute();
+
         } else {
             if (checkDraw()) {
                 System.out.println("--------------------------------");
@@ -104,7 +105,7 @@ public class SuperOX {
                 System.out.println("|    !!! Draw !!!    |");
                 System.out.println("+--------------------+");
                 showBoard();
-                isEnd = true;
+                askContinute();
 
             }
         }
@@ -165,9 +166,40 @@ public class SuperOX {
         return true;
     }
 
+    public static void askContinute() {
+
+        System.out.print("You want to play again (Y/N) : ");
+        Scanner sc = new Scanner(System.in);
+        String input = sc.next().toLowerCase();
+        while (!input.equals("y") && !input.equals("n")) {
+            System.out.print("You want to play again (Y/N) : ");
+            input = sc.next().toLowerCase();
+        }
+        if (input.equals("n")) {
+            isEnd = true;
+        } else {
+            resetBoard();
+            turn = "O";
+      
+        
+
+        }
+
+    }
+
+    public static void resetBoard() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                board[i][j] = "-";
+
+            }
+
+        }
+
+    }
+
     public static void main(String[] args) {
         turn = "X";
-//        startGame();
 
         showBoard();
         while (!isEnd) {
@@ -178,6 +210,6 @@ public class SuperOX {
             }
 
         }
-//        System.out.println("end");
+        System.out.println("GoodBye!!");
     }
 }
