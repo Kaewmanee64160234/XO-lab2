@@ -33,11 +33,22 @@ public class SuperOX {
             isEnd = false;
         }
     }
+    public static void showBoard(){
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                System.out.print(board[i][j]+" ");
+                
+            }
+            System.out.println();
+            
+        }
+    }
 
     public static void main(String[] args) {
         startGame();
         while (!isEnd) {
-            System.out.println("strart Game");
+            showBoard();
+            isEnd = true;
         }
         System.out.println("end");
     }
