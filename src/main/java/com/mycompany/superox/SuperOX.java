@@ -59,7 +59,6 @@ public class SuperOX {
         System.out.print("Input Column: ");
         column = sc.nextInt();
 
-
         if ((row > 0 && row < 4) && (column > 0 && column < 4)) {
             while (!board[row - 1][column - 1].equals("-")) {
                 System.out.println("--------------------------------");
@@ -89,7 +88,7 @@ public class SuperOX {
 
     public static void checkWinner() {
 
-        if (checkRow()) {
+        if (checkRow() || checkColumn()) {
             System.out.println("+--------------------+");
             System.out.println("|    !!! " + turn.toUpperCase() + " Win !!!   |");
             System.out.println("+--------------------+");
@@ -103,6 +102,16 @@ public class SuperOX {
     public static boolean checkRow() {
         for (int i = 0; i < 3; i++) {
             if (!board[row - 1][i].equals(turn)) {
+                return false;
+            }
+
+        }
+        return true;
+    }
+
+    public static boolean checkColumn() {
+        for (int i = 0; i < 3; i++) {
+            if (!board[i][column - 1].equals(turn)) {
                 return false;
             }
 
