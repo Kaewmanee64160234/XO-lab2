@@ -51,35 +51,49 @@ public class SuperOX {
 
     public static void inputRowAndColumn() {
         showTurn();
+        
         Scanner sc = new Scanner(System.in);
         System.out.print("Input Row :");
         row = sc.nextInt();
         System.out.print("Input Column :");
         column = sc.nextInt();
+        System.out.println("--------------------------------");
         if ((row > 0 && row < 4) && (column > 0 && column < 4)) {
-            while ((!(row > 0 && row < 4) && !(column > 0 && column < 4)) && !(board[row - 1][column - 1].equals("-"))) {
+            while (!board[row - 1][column - 1].equals("-")) {
                 showTurn();
+               showBoard();
                 System.out.print("Input Row :");
                 row = sc.nextInt();
                 System.out.print("Input Column :");
                 column = sc.nextInt();
+                         System.out.println("--------------------------------");
             }
             board[row - 1][column - 1] = turn;
+            changeTurn();
         } else {
             return;
         }
 
     }
 
+    public static void changeTurn() {
+        if (turn.toUpperCase().equals("X")) {
+            turn = "O";
+
+        } else {
+            turn = "X";
+        }
+    }
+
     public static void main(String[] args) {
         turn = "X";
 //        startGame();
-      
+
         showBoard();
         while (!isEnd) {
-           inputRowAndColumn();
-             showBoard();
-            
+            inputRowAndColumn();
+            showBoard();
+
         }
 //        System.out.println("end");
     }
