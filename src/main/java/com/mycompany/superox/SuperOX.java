@@ -88,13 +88,25 @@ public class SuperOX {
 
     public static void checkWinner() {
 
-        if (checkRow() || checkColumn() || checkDiagonal() ) {
+        if (checkRow() || checkColumn() || checkDiagonal()) {
+            System.out.println("--------------------------------");
+
             System.out.println("+--------------------+");
             System.out.println("|    !!! " + turn.toUpperCase() + " Win !!!   |");
             System.out.println("+--------------------+");
+            showBoard();
             isEnd = true;
         } else {
-            isEnd = false;
+            if (checkDraw()) {
+                System.out.println("--------------------------------");
+
+                System.out.println("+--------------------+");
+                System.out.println("|    !!! Draw !!!    |");
+                System.out.println("+--------------------+");
+                showBoard();
+                isEnd = true;
+
+            }
         }
 
     }
@@ -121,7 +133,7 @@ public class SuperOX {
 
     public static boolean checkDiagonal() {
         if (row - 1 == column - 1) {
-            for (int i = 0; i <3; i++) {
+            for (int i = 0; i < 3; i++) {
                 if (!board[i][i].equals(turn)) {
                     return false;
                 }
@@ -129,7 +141,7 @@ public class SuperOX {
             }
             return true;
         }
-        if ((row + column) - 2 ==2) {
+        if ((row + column) - 2 == 2) {
             for (int i = 0; i < 3; i++) {
                 if (!board[i][2 - i].equals(turn)) {
                     return false;
@@ -138,6 +150,19 @@ public class SuperOX {
             return true;
         }
         return false;
+    }
+
+    public static boolean checkDraw() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (board[i][j].equals("-")) {
+                    return false;
+                }
+
+            }
+
+        }
+        return true;
     }
 
     public static void main(String[] args) {
