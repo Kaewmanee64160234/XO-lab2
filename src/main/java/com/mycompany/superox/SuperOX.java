@@ -180,8 +180,6 @@ public class SuperOX {
         } else {
             resetBoard();
             turn = "O";
-      
-        
 
         }
 
@@ -198,9 +196,7 @@ public class SuperOX {
 
     }
 
-    public static void main(String[] args) {
-        turn = "X";
-
+    public static void processXO() {
         showBoard();
         while (!isEnd) {
             if (inputRowAndColumn()) {
@@ -211,5 +207,11 @@ public class SuperOX {
 
         }
         System.out.println("GoodBye!!");
+    }
+
+    public static void main(String[] args) {
+        turn = "X";
+        processXO();
+
     }
 }
